@@ -173,10 +173,22 @@ def add_transaction(source, recipient, amount):
     if source_amount < int(amount):
         return "Error -> Transaction amount exceeds pay.\n", 400
 
-    hash = hashlib.sha256((str(source_id) + "|"
-                           + str(recipient_id) + "|"
-                           + str(amount) + "|"
-                           + str(date.today())).encode()).hexdigest()
+    cursor.execute('SELECT * FROM trans \
+                        ORDER by id')
+    last_trans = cursor.fetchall()
+    if len(last_trans) != 0:
+        last_hash = last_trans[len(last_trans) - 1][5]
+
+        hash = hashlib.sha256((str(source_id) + "|"
+                               + str(recipient_id) + "|"
+                               + str(amount) + "|"
+                               + str(date.today()) + "|"
+                               + str(last_hash)).encode()).hexdigest()
+    else:
+        hash = hashlib.sha256((str(source_id) + "|"
+                               + str(recipient_id) + "|"
+                               + str(amount) + "|"
+                               + str(date.today())).encode()).hexdigest()
 
     cursor.execute('INSERT INTO trans (p1, p2, amount, date, hash) \
                         VALUES (?,?,?,?,?)', (source_id, recipient_id, amount, date.today(), hash))
@@ -202,12 +214,14 @@ def hash_check():
 
     connection = db.get_database()
     cursor = connection.cursor()
-    cursor.execute('SELECT * FROM trans')
+    cursor.execute('SELECT * FROM trans \
+                        ORDER by id')
     trans = cursor.fetchall()
 
     html = '<h1>Transactions hash check : </h1>'
+    last_hash = ''
 
-    for t in trans:
+    for i, t in enumerate(trans):
         id = t[0]
         p1 = t[1]
         p2 = t[2]
@@ -215,17 +229,23 @@ def hash_check():
         date = t[4]
         hash = t[5]
 
-        checked_hash = hashlib.sha256((str(p1) + "|" +
-                                       str(p2) + "|" +
-                                       str(amount) + "|" +
-                                       str(date)).encode()).hexdigest()
-
+        if i == 0:
+            checked_hash = hashlib.sha256((str(p1) + "|" +
+                                           str(p2) + "|" +
+                                           str(amount) + "|" +
+                                           str(date)).encode()).hexdigest()
+        else:
+            checked_hash = hashlib.sha256((str(p1) + "|" +
+                                           str(p2) + "|" +
+                                           str(amount) + "|" +
+                                           str(date) + "|" +
+                                           str(last_hash)).encode()).hexdigest()
+        last_hash = hash
         if checked_hash == hash:
             html += '<li>  Transaction n°' + str(id) + ' has correct hash. </li>'
         else:
             html += '<li>  Transaction n°' + str(id) + ' has incorrect hash. </li>'
-            #cursor.execute('UPDATE trans SET hash=? WHERE id=?', (checked_hash, id))
-
+            # cursor.execute('UPDATE trans SET hash=? WHERE id=?', (checked_hash, id))
     return html
 
 

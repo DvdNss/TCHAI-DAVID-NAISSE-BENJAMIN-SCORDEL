@@ -135,6 +135,27 @@ précédente.
 
 ### Solution :
 
+Pour parvenir à faire cet exercice, il faut rajouter le hash de la dernière transaction dans le tuple (P1, P2, t, a)
+de sorte qu'il devienne (P1, P2, t, a, h) avec h le hash de la transaction n-1. Rien de plus simple, il suffit
+de requêter le hash de la transaction n-1 avant de calculer le hash de notre nouvelle transaction n puis de l'ajouter
+dans le tuple comme expliqué précédemment.
+
+Nous obtenons donc, suite à l'ajout de transaction et donc l'appel du hash_check, l'affichage suivant :
+
+![Screenshot](tests/img/last_hash.PNG)
+
+Nous pouvons remarquer que le hash de la transaction n°1 est correct car il n'a pas d'antécédent et donc correspond
+bien à la fonction de vérification de hash avec le tuple (P1, P2, t, a) que nous avions réalisée dans les 
+exercices précédents. Nous pouvons aussi remarquer que notre nouvelle fonction de calcul de hash fonctionne
+correctement car les hashes des transactions suivantes prennent bien en compte le hash de la transaction
+précédente ce qui fait que notre fonction de vérification les reconnaît comme incorrects, car il 
+s'agit maintenant du tuple (P1, P2, t, a, h).
+
+Nous modifions donc notre fonction de __check_hash__ pour qu'elle fonctionne avec le tuple (P1, P2, t, a, h) et
+nous obtenons ceci :
+
+![Screenshot](tests/img/lasthashchec;.PNG)
+
 <hr />
 
 ## Exercice 10 :
