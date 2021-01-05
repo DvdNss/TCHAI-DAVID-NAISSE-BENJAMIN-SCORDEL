@@ -24,6 +24,7 @@ def initialize_database():
             p2 INTEGER,
             amount INTEGER,
             date DATE,
+            hash VARCHAR,
             FOREIGN KEY(p1) REFERENCES user(id),
             FOREIGN KEY(p2) REFERENCES user(id)
         ) 

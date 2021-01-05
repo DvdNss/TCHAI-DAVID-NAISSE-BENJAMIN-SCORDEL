@@ -1,3 +1,4 @@
+import hashlib
 from datetime import date
 
 from flask import *
@@ -168,8 +169,13 @@ def add_transaction(source, recipient, amount):
     if source_amount < int(amount):
         return "Error -> Transaction amount exceeds pay.\n", 400
 
-    cursor.execute('INSERT INTO trans (p1, p2, amount, date) \
-                        VALUES (?,?,?,?)', (source_id, recipient_id, amount, date.today()))
+    hash = hashlib.sha256((str(source_id) + "|"
+                           + str(recipient_id) + "|"
+                           + str(amount) + "|"
+                           + str(date.today())).encode()).hexdigest()
+
+    cursor.execute('INSERT INTO trans (p1, p2, amount, date, hash) \
+                        VALUES (?,?,?,?,?)', (source_id, recipient_id, amount, date.today(), hash))
 
     cursor.execute('UPDATE user \
                         SET pay = pay + (?) \
@@ -193,5 +199,3 @@ def create_database():
 
 
 app.run(host='0.0.0.0', debug=True)
-
-# curl http://0.0.0.0:5000/

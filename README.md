@@ -53,9 +53,11 @@ directement depuis le terminal. La requête est traduite par la phrase suivante 
 Celle-ci est donc traduite en SQL par :
 * UPDATE trans SET amount=9999 WHERE id=4
 
-Nous obtenons donc le résultat suivant : \
+Nous obtenons donc le résultat suivant : 
+
 ![Screenshot](tests/img/test1_before.PNG)
-![Screenshot](tests/img/test1_after.PNG) \
+![Screenshot](tests/img/test1_after.PNG) 
+
 La transaction n°4 a bien vu son montant passer à 9999€.
 
 <hr />
@@ -66,6 +68,12 @@ somme d’argent transférée de la personne P1 à la personne P2 au moment t et
 du tuple (P1, P2, t, a). Modifier votre programme afin d’intégrer la nouvelle structure des transactions.
 
 ## Solution :
+
+Pour cet exercice, nous avons tout simplement à ajouter une colonne __hash__ dans la table __trans__ de notre database
+puis à calculer au moment de l'ajout d'une transaction le hash correspondant au tuple (P1, P2, t, a). Après 
+implémentation nous obtenons à chaque ajout d'une transaction un hash de la forme : 
+
+![Screenshot](tests/img/hashcreation.PNG)
 
 <hr />
 
