@@ -106,9 +106,11 @@ def list_transactions():
                                     WHERE id=?', (result[i][2],))
         rec = cursor.fetchall()
         html += '<li> Transaction N°' + str(
-            result[i][0]) + ' --> FROM   ' + source[0][1] + '   TO   ' + rec[0][1] + '   AMOUNT   ' + str(
-            result[i][3]) + '€   ON   ' + str(result[i][4]) + ' </li>'
+            result[i][0]) + ' --> SOURCE: [ ' + source[0][1] + ' ] || RECIPIENT[ ' + rec[0][1] + ' ] || AMOUNT[ ' + str(
+            result[i][3]) + '€ ] || DATE [ ' + str(result[i][4]) + ' ] </li>'
     html += '</ul>\n'
+
+    html += hash_check()
 
     return html
 
@@ -137,9 +139,11 @@ def list_transaction_of(user):
                                         WHERE id=?', (result[i][2],))
         rec = cursor.fetchall()
         html += '<li> Transaction N°' + str(
-            result[i][0]) + ' --> FROM   ' + source[0][1] + '   TO   ' + rec[0][1] + '   AMOUNT   ' + str(
-            result[i][3]) + '€   ON   ' + str(result[i][4]) + ' </li>'
+            result[i][0]) + ' --> SOURCE: [ ' + source[0][1] + ' ] || RECIPIENT[ ' + rec[0][1] + ' ] || AMOUNT[ ' + str(
+            result[i][3]) + '€ ] || DATE [ ' + str(result[i][4]) + ' ] </li>'
     html += '</ul>\n'
+
+    html += hash_check()
 
     return html
 
