@@ -41,11 +41,22 @@ commandes disponibles pour la __V1__ :
 
 <hr />
 
-## Exercice 4 :
+## Exercice 4 - Test :
 Attaquer le système en modifiant directement le fichier de données, en changeant le
 montant d’une transaction.
 
 ## Solution :
+Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
+directement depuis le terminal. La requête est traduite par la phrase suivante : 
+* Modification du montant de la transaction n°4 à 9999€
+
+Celle-ci est donc traduite en SQL par :
+* UPDATE trans SET amount=9999 WHERE id=4
+
+Nous obtenons donc le résultat suivant : \
+![Screenshot](tests/img/test1_before.PNG)
+![Screenshot](tests/img/test1_after.PNG) \
+La transaction n°4 a bien vu son montant passer à 9999€.
 
 <hr />
 
