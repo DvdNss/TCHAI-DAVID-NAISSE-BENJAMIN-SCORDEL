@@ -105,12 +105,26 @@ l'attaque fonctionne toujours cependant nous pouvons voir que le hash est incorr
 
 <hr />
 
-## Exercice 8 :
+## Exercice 8 - Test :
 Attaquer le système en modifiant directement le fichier de données, en supprimant une
 transaction. La possibilité de supprimer une transaction peut être très dangereuse, la suppression peut
 entraîner la double dépense [9]
 
 ### Solution :
+
+Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
+directement depuis le terminal. La requête est traduite par la phrase suivante : 
+* Supprimer la transaction n°4
+
+Celle-ci est donc traduite en SQL par :
+* DELETE FROM trans WHERE id=4
+
+Nous obtenons donc le résultat suivant : 
+
+![Screenshot](tests/img/deletetransaction.PNG)
+
+On peut remarquer que l'attaque est réussie car la transaction n°4 a disparu cependant nous pouvons nous apercevoir
+qu'elle a disparu.
 
 <hr />
 
