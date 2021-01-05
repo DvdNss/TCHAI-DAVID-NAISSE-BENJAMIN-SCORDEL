@@ -15,7 +15,7 @@ Voici une liste des actions qui doivent être mises à la disposition via un API
 * (A2) Afficher une liste de toutes les transactions dans l’ordre chronologique. 
 * (A3) Afficher une liste des transactions dans l’ordre chronologique liées à une 
   personne donnée. 
-* (A4) Afficher le solde du compte de la personne donnée. 
+* (A4) Afficher le solde du compte de la personne donnée.  
 
 ## Solution :
 Nous commençons par créer le fichier __readme.md__ auquel nous ajoutons 
