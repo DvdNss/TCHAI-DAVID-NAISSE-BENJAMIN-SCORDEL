@@ -7,6 +7,8 @@ __Auteurs :__
 * David NAISSE (david_naisse@etu.u-bourgogne.fr)
 * Benjamin SCORDEL (benjamin_scordel@etu.u-bourgogne.fr)
 
+<hr />
+
 ## Exercice 3 : 
 En utilisant Flask [3], réaliser une première version du système “Tchaï”.
 Voici une liste des actions qui doivent être mises à la disposition via un API HTTP 
@@ -37,53 +39,82 @@ commandes disponibles pour la __V1__ :
 * __/rmv/uname__ : supprime l'utilisateur __uname__
 * __/create_database__ : initialise notre database
 
+<hr />
+
 ## Exercice 4 :
 Attaquer le système en modifiant directement le fichier de données, en changeant le
 montant d’une transaction.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 5 :
 Nous ajoutons maintenant le hash d’une transaction dans son tuplet : (P1, P2, t, a, h), où a est égal à la
 somme d’argent transférée de la personne P1 à la personne P2 au moment t et h correspond au hash
 du tuple (P1, P2, t, a). Modifier votre programme afin d’intégrer la nouvelle structure des transactions.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 6 :
 Ajouter l’action suivante disponible en API HTTP :
 (A5) Vérifier l’intégrité des données en recalculant les hashs à partir des données et en les comparant
 avec les hashs stockés précédemment.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 7 :
 Vérifiez que l’attaque précédente ne fonctionne plus.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 8 :
 Attaquer le système en modifiant directement le fichier de données, en supprimant une
 transaction. La possibilité de supprimer une transaction peut être très dangereuse, la suppression peut
 entraîner la double dépense [9]
 
 ## Solution :
+
+<hr />
+
 ## Exercice 9 :
 Modifier la méthode de calcul de hash. Maintenant la valeur du hash hi+1 va dépendre
 non seulement de la transaction en cours, mais également de la valeur du hash hi de la transaction
 précédente.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 10 :
 Vérifiez que les attaques précédentes ne fonctionnent plus.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 11 :
 Attaquer le système en modifiant directement le fichier de données, en ajoutant, par
 exemple, une transaction provenant d’une autre personne vers le compte de l’attaquant.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 12 :
 Lire le message [4], le papier original de Satoshi Nakamoto [5] et la discussion ultérieure
 sur la liste de diffusion ‘The Cryptography and Cryptography Policy Mailing List”.
 
 ## Solution :
+
+<hr />
+
 ## Exercice 13 :
 Utiliser la cryptographie asymétrique afin d’assurer l’authenticité de l’expéditeur.
 ## Solution :
