@@ -93,10 +93,15 @@ Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande
 
 <hr />
 
-## Exercice 7 :
+## Exercice 7 - Test :
 Vérifiez que l’attaque précédente ne fonctionne plus.
 
 ### Solution :
+
+Nous relançons l'attaque de l'exercice 4 qui vise à modifier le montant de la transaction n°4 à 9999€. Cette fois-ci,
+l'attaque fonctionne toujours cependant nous pouvons voir que le hash est incorrect dans le __check_hash__ :
+
+![Screenshot](tests/img/hashattack.PNG)
 
 <hr />
 
