@@ -158,10 +158,20 @@ nous obtenons ceci :
 
 <hr />
 
-## Exercice 10 :
+## Exercice 10 - Test :
 Vérifiez que les attaques précédentes ne fonctionnent plus.
 
 ### Solution :
+
+Nous relançons donc les attaques précédentes pour vérifier si celles-ci fonctionnent toujours :
+
+![Screenshot](tests/img/ex10.PNG)
+
+On remarque que la première attaque visant à modifier le montant de la transaction n°4 a bien fonctionné même
+si elle a engendré une vérification de hash incorrecte. La seconde attaque visant à supprimer une transaction a
+elle aussi bien fonctionné cependant on peut se rendre compte sur l'image qu'une transaction a bien été 
+supprimée, en l'occurrence celle entre la transaction n°3 et n°5 car la transaction n°5 qui dépend du hash de la
+transaction précédente est incorrecte, ce qui veut dire qu'il manque une transaction.
 
 <hr />
 
