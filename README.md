@@ -1,11 +1,20 @@
 # Projet TP : Systèmes d'information avancés
 
-__Objectif :__ Concevoir un système de transactions électroniques avec une intégrité garantie, accessible
+### Objectif :
+Concevoir un système de transactions électroniques avec une intégrité garantie, accessible
 par le protocole HTTP.
 
-__Auteurs :__
+### Auteurs :
 * David NAISSE (david_naisse@etu.u-bourgogne.fr)
 * Benjamin SCORDEL (benjamin_scordel@etu.u-bourgogne.fr)
+
+### Choix :
+* __Langage__ ----- Python : forte préférence car c'est le langage que nous utilisons le plus.
+* __GitHub__ ------- Github Desktop : beaucoup plus accessible et intuitif, l'affichage graphique en fait un outil simple et efficace.
+* __Framework__ -- Flask : seul Framework à notre connaissance pour faire ce projet.
+* __Stockage__ ---- Sqlite3 : une approche base de données nous semble plus appropriée, de plus nous avons beaucoup de connaissances en SQL.
+* __Script__ --------- Bash : la manière la plus simple de faire du requêtage depuis un terminal linux.
+* __Hash__ ---------- Sha256 : selon nous le hash le plus sécurisé à l'heure d'aujourd'hui.
 
 <hr />
 
