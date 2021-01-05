@@ -45,7 +45,7 @@ commandes disponibles pour la __V1__ :
 Attaquer le système en modifiant directement le fichier de données, en changeant le
 montant d’une transaction.
 
-## Solution :
+### Solution :
 Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
 directement depuis le terminal. La requête est traduite par la phrase suivante : 
 * Modification du montant de la transaction n°4 à 9999€
@@ -67,7 +67,7 @@ Nous ajoutons maintenant le hash d’une transaction dans son tuplet : (P1, P2, 
 somme d’argent transférée de la personne P1 à la personne P2 au moment t et h correspond au hash
 du tuple (P1, P2, t, a). Modifier votre programme afin d’intégrer la nouvelle structure des transactions.
 
-## Solution :
+### Solution :
 
 Pour cet exercice, nous avons tout simplement à ajouter une colonne __hash__ dans la table __trans__ de notre database
 puis à calculer au moment de l'ajout d'une transaction le hash correspondant au tuple (P1, P2, t, a). Après 
@@ -82,14 +82,21 @@ Ajouter l’action suivante disponible en API HTTP :
 (A5) Vérifier l’intégrité des données en recalculant les hashs à partir des données et en les comparant
 avec les hashs stockés précédemment.
 
-## Solution :
+### Solution :
+
+Afin de répondre à cet exercice, nous créons une fonction __hash_check__ nous permettant de vérifier les hashes de
+toutes les transactions.
+
+Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande __/hash_check__ :
+
+![Screenshot](tests/img/hashcheck.PNG)
 
 <hr />
 
 ## Exercice 7 :
 Vérifiez que l’attaque précédente ne fonctionne plus.
 
-## Solution :
+### Solution :
 
 <hr />
 
@@ -98,7 +105,7 @@ Attaquer le système en modifiant directement le fichier de données, en supprim
 transaction. La possibilité de supprimer une transaction peut être très dangereuse, la suppression peut
 entraîner la double dépense [9]
 
-## Solution :
+### Solution :
 
 <hr />
 
@@ -107,14 +114,14 @@ Modifier la méthode de calcul de hash. Maintenant la valeur du hash hi+1 va dé
 non seulement de la transaction en cours, mais également de la valeur du hash hi de la transaction
 précédente.
 
-## Solution :
+### Solution :
 
 <hr />
 
 ## Exercice 10 :
 Vérifiez que les attaques précédentes ne fonctionnent plus.
 
-## Solution :
+### Solution :
 
 <hr />
 
@@ -122,7 +129,7 @@ Vérifiez que les attaques précédentes ne fonctionnent plus.
 Attaquer le système en modifiant directement le fichier de données, en ajoutant, par
 exemple, une transaction provenant d’une autre personne vers le compte de l’attaquant.
 
-## Solution :
+### Solution :
 
 <hr />
 
@@ -130,10 +137,11 @@ exemple, une transaction provenant d’une autre personne vers le compte de l’
 Lire le message [4], le papier original de Satoshi Nakamoto [5] et la discussion ultérieure
 sur la liste de diffusion ‘The Cryptography and Cryptography Policy Mailing List”.
 
-## Solution :
+### Solution :
 
 <hr />
 
 ## Exercice 13 :
 Utiliser la cryptographie asymétrique afin d’assurer l’authenticité de l’expéditeur.
-## Solution :
+
+### Solution :

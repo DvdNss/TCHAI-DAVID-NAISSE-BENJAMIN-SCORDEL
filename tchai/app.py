@@ -5,7 +5,7 @@ from flask import *
 from flask import g
 
 import config as cfg
-import database as db
+from tchai import database as db
 
 app = Flask(__name__)
 
@@ -190,6 +190,39 @@ def add_transaction(source, recipient, amount):
     resp += list_users()
 
     return resp
+
+
+@app.route(cfg.HASH_CHECK, methods=[cfg.HASH_CHECK_METHOD])
+def hash_check():
+    """Checks if the hash of the transaction n°<id> is correct. """
+
+    connection = db.get_database()
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM trans')
+    trans = cursor.fetchall()
+
+    html = '<h1>Transactions hash check : </h1>'
+
+    for t in trans:
+        id = t[0]
+        p1 = t[1]
+        p2 = t[2]
+        amount = t[3]
+        date = t[4]
+        hash = t[5]
+
+        checked_hash = hashlib.sha256((str(p1) + "|" +
+                                       str(p2) + "|" +
+                                       str(amount) + "|" +
+                                       str(date)).encode()).hexdigest()
+
+        if checked_hash == hash:
+            html += '<li>  Transaction n°' + str(id) + ' has correct hash. </li>'
+        else:
+            html += '<li>  Transaction n°' + str(id) + ' has incorrect hash. </li>'
+            #cursor.execute('UPDATE trans SET hash=? WHERE id=?', (checked_hash, id))
+
+    return html
 
 
 @app.route(cfg.CREATE_DATABASE, methods=[cfg.CREATE_DATABASE_METHOD])
