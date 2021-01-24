@@ -1,5 +1,7 @@
 # Projet TP : Systèmes d'information avancés
 
+<hr />
+
 ### Objectif :
 Concevoir un système de transactions électroniques avec une intégrité garantie, accessible
 par le protocole HTTP.
@@ -8,7 +10,7 @@ par le protocole HTTP.
 * David NAISSE (david_naisse@etu.u-bourgogne.fr)
 * Benjamin SCORDEL (benjamin_scordel@etu.u-bourgogne.fr)
 
-### Choix :
+### Choix des outils :
 * __Langage__ ----- Python : forte préférence car c'est le langage que nous utilisons le plus.
 * __GitHub__ ------- Github Desktop : beaucoup plus accessible et intuitif, l'affichage graphique en fait un outil simple et efficace.
 * __Framework__ -- Flask : seul Framework à notre connaissance pour faire ce projet.
@@ -16,24 +18,33 @@ par le protocole HTTP.
 * __Script__ --------- Bash : la manière la plus simple de faire du requêtage depuis un terminal linux.
 * __Hash__ ---------- Sha256 : selon nous le hash le plus sécurisé à l'heure d'aujourd'hui.
 
-<hr />
+### Tests :
+* Changer le montant d'une transaction en modifiant directement le fichier des données (ex. 4)
+  > UPDATE trans SET amount=9999 WHERE id=4
+* Supprimer une transaction en modifiant directement le fichier des données (ex. 8)
+  > DELETE FROM trans WHERE id=4
+* Insérer une transaction en modifiant directement le fichier des données (ex. 11)
+  > INSERT INTO trans(p1, p2, amount) VALUES(1, 2, 9999)
 
 ## Exercice 3 : 
-En utilisant Flask [3], réaliser une première version du système “Tchaï”.
+
+<hr />
+
+> __Énoncé :__ En utilisant Flask [3], réaliser une première version du système “Tchaï”.
 Voici une liste des actions qui doivent être mises à la disposition via un API HTTP 
 (voir TD-1) par votre système “Tchaï” : 
-* (A1) Enregistrer une transaction. 
-* (A2) Afficher une liste de toutes les transactions dans l’ordre chronologique. 
-* (A3) Afficher une liste des transactions dans l’ordre chronologique liées à une 
+> * (A1) Enregistrer une transaction. 
+> * (A2) Afficher une liste de toutes les transactions dans l’ordre chronologique. 
+> * (A3) Afficher une liste des transactions dans l’ordre chronologique liées à une 
   personne donnée. 
-* (A4) Afficher le solde du compte de la personne donnée.  
+> * (A4) Afficher le solde du compte de la personne donnée.  
 
-## Solution :
+### Solution :
 Nous commençons par créer le fichier __readme.md__ auquel nous ajoutons 
 nos noms. Nous implémentons ensuite un fichier __config.py__ qui contiendra toutes nos
 variables globales afin de rendre plus pratique l'utilisation de notre programme.
 
-Nous implémentons ensuite le fichier __app_v1.py__, qui contiendra notre code pour cet
+Nous implémentons ensuite le fichier __app.py__, qui contiendra notre code pour cet
 exercice. Le fichier __database.py__ contient les informations nécessaires à la création 
 de notre base de données.
 
@@ -48,31 +59,39 @@ commandes disponibles pour la __V1__ :
 * __/rmv/uname__ : supprime l'utilisateur __uname__
 * __/create_database__ : initialise notre database
 
-<hr />
+> Note : Toutes ces commandes sont modifiables directement depuis le fichier __config.py__
 
 ## Exercice 4 - Test :
-Attaquer le système en modifiant directement le fichier de données, en changeant le
+
+<hr />
+
+> __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en changeant le
 montant d’une transaction.
 
 ### Solution :
 Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
 directement depuis le terminal. La requête est traduite par la phrase suivante : 
-* Modification du montant de la transaction n°4 à 9999€
-
+```
+Modification du montant de la transaction n°4 à 9999€
+```
 Celle-ci est donc traduite en SQL par :
-* UPDATE trans SET amount=9999 WHERE id=4
-
+```
+UPDATE trans SET amount=9999 WHERE id=4
+```
 Nous obtenons donc le résultat suivant : 
 
 ![Screenshot](tests/img/test1_before.PNG)
 ![Screenshot](tests/img/test1_after.PNG) 
 
-La transaction n°4 a bien vu son montant passer à 9999€.
+> Note : 
+> * La transaction n°4 a bien vu son montant passer à 9999€ donc l'attaque fonctionne. 
+> * Les deux autres attaques fonctionnent elles aussi.
+
+## Exercice 5 :
 
 <hr />
 
-## Exercice 5 :
-Nous ajoutons maintenant le hash d’une transaction dans son tuplet : (P1, P2, t, a, h), où a est égal à la
+> __Énoncé :__ Nous ajoutons maintenant le hash d’une transaction dans son tuplet : (P1, P2, t, a, h), où a est égal à la
 somme d’argent transférée de la personne P1 à la personne P2 au moment t et h correspond au hash
 du tuple (P1, P2, t, a). Modifier votre programme afin d’intégrer la nouvelle structure des transactions.
 
@@ -84,10 +103,11 @@ implémentation nous obtenons à chaque ajout d'une transaction un hash de la fo
 
 ![Screenshot](tests/img/hashcreation.PNG)
 
+## Exercice 6 :
+
 <hr />
 
-## Exercice 6 :
-Ajouter l’action suivante disponible en API HTTP :
+> __Énoncé :__ Ajouter l’action suivante disponible en API HTTP :
 (A5) Vérifier l’intégrité des données en recalculant les hashs à partir des données et en les comparant
 avec les hashs stockés précédemment.
 
@@ -100,10 +120,13 @@ Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande
 
 ![Screenshot](tests/img/hashcheck.PNG)
 
-<hr />
+> Note : Nous pouvons ici constater que nous ne rencontrons aucun problème concernant les hashes.
 
 ## Exercice 7 - Test :
-Vérifiez que l’attaque précédente ne fonctionne plus.
+
+<hr />
+
+> __Énoncé :__ Vérifiez que l’attaque précédente ne fonctionne plus.
 
 ### Solution :
 
@@ -112,10 +135,16 @@ l'attaque fonctionne toujours cependant nous pouvons voir que le hash est incorr
 
 ![Screenshot](tests/img/hashattack.PNG)
 
-<hr />
+> Note : 
+> * En constatant que la transaction a été modifiée, nous pouvons en conclure que la première attaque ne 
+fonctionnera. 
+> * Les deux autres attaques fonctionnent toujours.
 
 ## Exercice 8 - Test :
-Attaquer le système en modifiant directement le fichier de données, en supprimant une
+
+<hr />
+
+> __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en supprimant une
 transaction. La possibilité de supprimer une transaction peut être très dangereuse, la suppression peut
 entraîner la double dépense [9]
 
@@ -123,22 +152,25 @@ entraîner la double dépense [9]
 
 Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
 directement depuis le terminal. La requête est traduite par la phrase suivante : 
-* Supprimer la transaction n°4
+ > Supprimer la transaction n°4
 
 Celle-ci est donc traduite en SQL par :
-* DELETE FROM trans WHERE id=4
+> DELETE FROM trans WHERE id=4
 
 Nous obtenons donc le résultat suivant : 
 
 ![Screenshot](tests/img/deletetransaction.PNG)
 
-On peut remarquer que l'attaque est réussie car la transaction n°4 a disparu cependant nous pouvons nous apercevoir
-qu'elle a disparu.
+> Note :
+> * On peut remarquer que la première attaque ne fonctionne toujours plus.
+> * La deuxième fonctionne même si nous pouvons nous apercevoir de la transaction manquante.
+> * La troisième attaque visant à changer le montant d'une transaction fonctionne elle aussi.
+
+## Exercice 9 :
 
 <hr />
 
-## Exercice 9 :
-Modifier la méthode de calcul de hash. Maintenant la valeur du hash hi+1 va dépendre
+> __Énoncé :__ Modifier la méthode de calcul de hash. Maintenant la valeur du hash hi+1 va dépendre
 non seulement de la transaction en cours, mais également de la valeur du hash hi de la transaction
 précédente.
 
@@ -153,7 +185,7 @@ Nous obtenons donc, suite à l'ajout de transaction et donc l'appel du hash_chec
 
 ![Screenshot](tests/img/last_hash.PNG)
 
-Nous pouvons remarquer que le hash de la transaction n°1 est correct car il n'a pas d'antécédent et donc correspond
+> Nous pouvons remarquer que le hash de la transaction n°1 est correct car il n'a pas d'antécédent et donc correspond
 bien à la fonction de vérification de hash avec le tuple (P1, P2, t, a) que nous avions réalisée dans les 
 exercices précédents. Nous pouvons aussi remarquer que notre nouvelle fonction de calcul de hash fonctionne
 correctement car les hashes des transactions suivantes prennent bien en compte le hash de la transaction
@@ -165,10 +197,11 @@ nous obtenons ceci :
 
 ![Screenshot](tests/img/lasthashchec;.PNG)
 
+## Exercice 10 - Test :
+
 <hr />
 
-## Exercice 10 - Test :
-Vérifiez que les attaques précédentes ne fonctionnent plus.
+> __Énoncé :__ Vérifiez que les attaques précédentes ne fonctionnent plus.
 
 ### Solution :
 
@@ -176,31 +209,52 @@ Nous relançons donc les attaques précédentes pour vérifier si celles-ci fonc
 
 ![Screenshot](tests/img/ex10.PNG)
 
-On remarque que la première attaque visant à modifier le montant de la transaction n°4 a bien fonctionné même
-si elle a engendré une vérification de hash incorrecte. La seconde attaque visant à supprimer une transaction a
-elle aussi bien fonctionné cependant on peut se rendre compte sur l'image qu'une transaction a bien été 
-supprimée, en l'occurrence celle entre la transaction n°3 et n°5 car la transaction n°5 qui dépend du hash de la
-transaction précédente est incorrecte, ce qui veut dire qu'il manque une transaction.
+> Note : 
+> * On remarque que la première attaque visant à modifier le montant de la transaction n°4 ne fonctionne plus
+> * La seconde attaque visant à supprimer une transaction ne fonctionne plus car on peut se rendre 
+compte sur l'image qu'une transaction a bien été supprimée, en l'occurrence celle entre la transaction 
+n°3 et n°5 car la transaction n°5 qui dépend du hash de la transaction précédente est incorrecte, ce qui 
+veut dire qu'il manque une transaction. 
+> * La troisième attaque visant à insérer une transaction entre deux
+personnes elle fonctionne encore.
+
+## Exercice 11 :
 
 <hr />
 
-## Exercice 11 :
-Attaquer le système en modifiant directement le fichier de données, en ajoutant, par
+> __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en ajoutant, par
 exemple, une transaction provenant d’une autre personne vers le compte de l’attaquant.
 
 ### Solution :
 
-<hr />
+Afin de réaliser ce genre d'attaque, nous rédigeons un script bash qui nous permettra d'attaquer la base de données 
+directement depuis le terminal. La requête est traduite par la phrase suivante : 
+> Ajouter une transaction de David à Elouan d'une valeur de 9999€
+
+Celle-ci est donc traduite en SQL par :
+> INSERT INTO trans(p1, p2, amount) VALUES (1,2, 9999)
+
+Nous obtenons donc le résultat suivant : 
+
+![Screenshot](tests/img/ex11.PNG)
+
+> Note : On peut remarquer que même si l'attaque fonctionne, celle-ci est bien identifiée par le système.
 
 ## Exercice 12 :
-Lire le message [4], le papier original de Satoshi Nakamoto [5] et la discussion ultérieure
+
+<hr />
+
+> __Énoncé :__ Lire le message [4], le papier original de Satoshi Nakamoto [5] et la discussion ultérieure
 sur la liste de diffusion ‘The Cryptography and Cryptography Policy Mailing List”.
 
 ### Solution :
 
-<hr />
+Pas de solution à proposer pour cet exercice.
 
 ## Exercice 13 :
-Utiliser la cryptographie asymétrique afin d’assurer l’authenticité de l’expéditeur.
+
+<hr />
+
+> __Énoncé :__ Utiliser la cryptographie asymétrique afin d’assurer l’authenticité de l’expéditeur.
 
 ### Solution :
