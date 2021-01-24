@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# Moving to the database directory
 DATABASE_NAME=project_database
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 cd $SCRIPTPATH
 cd ..
 
-# Attack to edit a transaction amount
-echo "Ex 7 - Test 1"
-test1=$(sqlite3 $DATABASE_NAME "DELETE FROM trans WHERE id=4;")
+echo "Ex 8 - Test 2: DELETING THE TRANSACTION N°5."
+test1=$(sqlite3 $DATABASE_NAME "DELETE FROM trans WHERE id=5;")
 if [[ $test1 = "" ]]
 then
     echo Successfully attacked.

@@ -1,14 +1,12 @@
 #!/bin/bash
 
-# Moving to the database directory
 DATABASE_NAME=project_database
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 cd $SCRIPTPATH
 cd ..
 
-# Attack to edit a transaction amount
-echo "Ex 11 - Test 1"
-test1=$(sqlite3 $DATABASE_NAME "INSERT INTO trans(p1, p2, amount) VALUES(1, 2, 9999);")
+echo "Ex 11 - Test 3: INSERTING TRANSACTION INTO DATABASE."
+test1=$(sqlite3 $DATABASE_NAME "INSERT INTO trans(p1, p2, amount, hash, signature) VALUES(1, 2, 9999,'XKJDGFKJSFSDGHJFS' , 'xxxxxxxxKJLSDHFLSJKFHDFJHSDFKLSDHFLKSDJFHSKLFHxxxx');")
 if [[ $test1 = "" ]]
 then
     echo Successfully attacked.
