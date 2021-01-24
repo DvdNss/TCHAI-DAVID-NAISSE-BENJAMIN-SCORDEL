@@ -1,7 +1,5 @@
 # Projet TP : Systèmes d'information avancés
 
-<hr />
-
 ### Objectif :
 Concevoir un système de transactions électroniques avec une intégrité garantie, accessible
 par le protocole HTTP.
@@ -26,9 +24,7 @@ par le protocole HTTP.
 * Insérer une transaction en modifiant directement le fichier des données (ex. 11)
   > INSERT INTO trans(p1, p2, amount) VALUES(1, 2, 9999)
 
-## Exercice 3 : 
-
-<hr />
+## Exercice 3 :
 
 > __Énoncé :__ En utilisant Flask [3], réaliser une première version du système “Tchaï”.
 Voici une liste des actions qui doivent être mises à la disposition via un API HTTP 
@@ -63,8 +59,6 @@ commandes disponibles pour la __V1__ :
 
 ## Exercice 4 - Test :
 
-<hr />
-
 > __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en changeant le
 montant d’une transaction.
 
@@ -89,8 +83,6 @@ Nous obtenons donc le résultat suivant :
 
 ## Exercice 5 :
 
-<hr />
-
 > __Énoncé :__ Nous ajoutons maintenant le hash d’une transaction dans son tuplet : (P1, P2, t, a, h), où a est égal à la
 somme d’argent transférée de la personne P1 à la personne P2 au moment t et h correspond au hash
 du tuple (P1, P2, t, a). Modifier votre programme afin d’intégrer la nouvelle structure des transactions.
@@ -104,8 +96,6 @@ implémentation nous obtenons à chaque ajout d'une transaction un hash de la fo
 ![Screenshot](tests/img/hashcreation.PNG)
 
 ## Exercice 6 :
-
-<hr />
 
 > __Énoncé :__ Ajouter l’action suivante disponible en API HTTP :
 (A5) Vérifier l’intégrité des données en recalculant les hashs à partir des données et en les comparant
@@ -124,8 +114,6 @@ Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande
 
 ## Exercice 7 - Test :
 
-<hr />
-
 > __Énoncé :__ Vérifiez que l’attaque précédente ne fonctionne plus.
 
 ### Solution :
@@ -141,8 +129,6 @@ fonctionnera.
 > * Les deux autres attaques fonctionnent toujours.
 
 ## Exercice 8 - Test :
-
-<hr />
 
 > __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en supprimant une
 transaction. La possibilité de supprimer une transaction peut être très dangereuse, la suppression peut
@@ -167,8 +153,6 @@ Nous obtenons donc le résultat suivant :
 > * La troisième attaque visant à changer le montant d'une transaction fonctionne elle aussi.
 
 ## Exercice 9 :
-
-<hr />
 
 > __Énoncé :__ Modifier la méthode de calcul de hash. Maintenant la valeur du hash hi+1 va dépendre
 non seulement de la transaction en cours, mais également de la valeur du hash hi de la transaction
@@ -199,8 +183,6 @@ nous obtenons ceci :
 
 ## Exercice 10 - Test :
 
-<hr />
-
 > __Énoncé :__ Vérifiez que les attaques précédentes ne fonctionnent plus.
 
 ### Solution :
@@ -219,8 +201,6 @@ veut dire qu'il manque une transaction.
 personnes elle fonctionne encore.
 
 ## Exercice 11 :
-
-<hr />
 
 > __Énoncé :__ Attaquer le système en modifiant directement le fichier de données, en ajoutant, par
 exemple, une transaction provenant d’une autre personne vers le compte de l’attaquant.
@@ -242,8 +222,6 @@ Nous obtenons donc le résultat suivant :
 
 ## Exercice 12 :
 
-<hr />
-
 > __Énoncé :__ Lire le message [4], le papier original de Satoshi Nakamoto [5] et la discussion ultérieure
 sur la liste de diffusion ‘The Cryptography and Cryptography Policy Mailing List”.
 
@@ -252,8 +230,6 @@ sur la liste de diffusion ‘The Cryptography and Cryptography Policy Mailing Li
 Pas de solution à proposer pour cet exercice.
 
 ## Exercice 13 :
-
-<hr />
 
 > __Énoncé :__ Utiliser la cryptographie asymétrique afin d’assurer l’authenticité de l’expéditeur.
 
