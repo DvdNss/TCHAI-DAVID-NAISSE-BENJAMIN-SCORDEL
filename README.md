@@ -41,6 +41,8 @@ Concevoir un système de transactions électroniques avec une intégrité garant
 * __/create_database__ : initialise notre database
 * __/check_transactions__ : vérifie la validité de toutes les transactions du système
 
+> Note : Toutes ces commandes sont modifiables directement depuis le fichier __config.ini__
+
 ## Exercice 3 :
 
 > __Énoncé :__ En utilisant Flask [3], réaliser une première version du système “Tchaï”. Voici une liste des actions qui doivent être mises à la disposition via un API HTTP
@@ -53,7 +55,7 @@ Concevoir un système de transactions électroniques avec une intégrité garant
 ### Solution :
 
 Nous commençons par créer le fichier __readme.md__ auquel nous ajoutons nos noms. Nous implémentons ensuite un
-fichier __config.py__ qui contiendra toutes nos variables globales afin de rendre plus pratique l'utilisation de notre
+fichier __config.ini__ qui contiendra toutes nos variables globales afin de rendre plus pratique l'utilisation de notre
 programme.
 
 Nous implémentons ensuite le fichier __app.py__, qui contiendra notre code pour cet exercice. Le fichier __database.py__
@@ -70,8 +72,6 @@ V1__ :
 * __/add/uname/pay__ : ajoute un utilisateur nommé __uname__ et possédant __pay__ €
 * __/rmv/uname__ : supprime l'utilisateur __uname__
 * __/create_database__ : initialise notre database
-
-> Note : Toutes ces commandes sont modifiables directement depuis le fichier __config.py__
 
 ## Exercice 4 - Test :
 
@@ -120,10 +120,10 @@ implémentation nous obtenons à chaque ajout d'une transaction un hash de la fo
 
 ### Solution :
 
-Afin de répondre à cet exercice, nous créons une fonction __hash_check__ nous permettant de vérifier les hashes de
+Afin de répondre à cet exercice, nous créons une fonction __check__ nous permettant de vérifier les hashes de
 toutes les transactions.
 
-Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande __/hash_check__ :
+Nous obtenons cet affichage lorsque nous appelons cette fonction via la commande __/check__ :
 
 ![Screenshot](tests/img/hashcheck.PNG)
 
@@ -141,7 +141,8 @@ l'attaque fonctionne toujours cependant nous pouvons voir que le hash est incorr
 ![Screenshot](tests/img/hashattack.PNG)
 
 > Note :
-> * En constatant que la transaction a été modifiée, nous pouvons en conclure que la première attaque ne fonctionnera.
+> * En constatant que la transaction a été modifiée, nous pouvons en conclure que la première attaque ne 
+    fonctionnera plus.
 > * Les deux autres attaques fonctionnent toujours.
 
 ## Exercice 8 - Test :
@@ -164,7 +165,7 @@ Nous obtenons donc le résultat suivant :
 > Note :
 > * On peut remarquer que la première attaque ne fonctionne toujours plus.
 > * La deuxième fonctionne même si nous pouvons nous apercevoir de la transaction manquante.
-> * La troisième attaque visant à changer le montant d'une transaction fonctionne elle aussi.
+> * La troisième attaque visant à insérer une transaction fonctionne elle aussi.
 
 ## Exercice 9 :
 
@@ -173,11 +174,11 @@ Nous obtenons donc le résultat suivant :
 ### Solution :
 
 Pour parvenir à faire cet exercice, il faut rajouter le hash de la dernière transaction dans le tuple (P1, P2, t, a)
-de sorte qu'il devienne (P1, P2, t, a, h) avec h le hash de la transaction n-1. Rien de plus simple, il suffit de
+de sorte qu'il devienne (P1, P2, t, a, h) avec h le hash de la transaction n-1. Il suffit donc de
 requêter le hash de la transaction n-1 avant de calculer le hash de notre nouvelle transaction n puis de l'ajouter dans
 le tuple comme expliqué précédemment.
 
-Nous obtenons donc, suite à l'ajout de transaction et donc l'appel du hash_check, l'affichage suivant :
+Nous obtenons donc, suite à l'ajout de transaction et donc l'appel du check, l'affichage suivant :
 
 ![Screenshot](tests/img/last_hash.PNG)
 
@@ -251,9 +252,9 @@ Après avoir implémenté le signature de cryptage et de signature, nous pouvons
 
 > Note : On peut remaquer que toutes les attaques sont visibles.
 > * La première, visant à changer le montant de la transaction n°2, n'est plus efficace contre notre système car
-    > celui nous notifie du manque de validité du hash de cette même transaction.
+    celui nous notifie du manque de validité du hash de cette même transaction.
 > * La seconde, visant à supprimer la transaction n°5, n'est aussi plus efficace contre notre système car nous pouvons
-    > nous rendre compte que le hash de la transaction n°6 est faux et donc qu'il manque une transaction avant celle-ci.
+    nous rendre compte que le hash de la transaction n°6 est faux et donc qu'il manque une transaction avant celle-ci.
 > * La troisième, visant à insérer une transaction entre deux utilisateurs n'est elle aussi plus efficace. Comme nous
-    > pouvons le voir sur la transaction n°12, la signature est incorrecte ce qui veut donc dire que la transaction n'est
-    > pas une transaction validée par le système.
+    pouvons le voir sur la transaction n°12, la signature est incorrecte ce qui veut donc dire que la transaction n'est
+    pas une transaction validée par le système.
