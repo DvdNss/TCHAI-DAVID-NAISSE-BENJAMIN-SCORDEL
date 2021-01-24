@@ -247,7 +247,7 @@ Chacune de ces clés sera stockée dans des fichiers en local.
 
 Après avoir implémenté le signature de cryptage et de signature, nous pouvons relancer les tests:
 
-![Screenshot](tests/img/ex13.PNG)
+![Screenshot](tests/img/EX13.PNG)
 
 > Note : On peut remaquer que toutes les attaques sont visibles.
 > * La première, visant à changer le montant de la transaction n°2, n'est plus efficace contre notre système car
